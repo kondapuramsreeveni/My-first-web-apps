@@ -1,13 +1,13 @@
-name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push]
-jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+name: learn-github-actions #This is Action Name
+run-name: ${{ github.actor }} is learning GitHub Actions #Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+on: [push]   #use 'on' to define which events can cause the workflow to run and events like 'push/pullrequest/pull/fork etc
+jobs:         #Groups together all the jobs that run in the learn-github-actions workflow.
+  check-bats-version:             #Defines a job named check-bats-version. The child keys will define properties of the job.
+    runs-on: ubuntu-latest     #Configures the job to run on the latest version of an Ubuntu Linux runner
+    steps:                    #Groups together all the steps that run in the check-bats-version job
+      - uses: actions/checkout@v4                  #The uses keyword specifies that this step will run v4 of the actions/checkout action.
+      - uses: actions/setup-node@v4        #node.js installation
         with:
           node-version: '20'
-      - run: npm install -g bats
-      - run: bats -v
+      - run: npm install -g bats             # npm installation command
+      - run: bats -v                           #run the bats command with a parameter that outputs the software version.
